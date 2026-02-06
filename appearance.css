@@ -1,0 +1,333 @@
+@import url(./views/GamePadView.css);
+
+@font-face {
+    font-family: Silkscreen;
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/silkscreen/Silkscreen-Regular.ttf');
+}
+
+@font-face {
+    font-family: Silkscreen;
+    font-style: normal;
+    font-weight: 700;
+    src: url('./fonts/silkscreen/Silkscreen-Bold.ttf');
+}
+
+html {
+    --clr-green: #8feb39;
+    --clr-pink: #f700ff;
+    --clr-blue: #34fafa;
+    font-family: Silkscreen;
+    height: 100%;
+    width: 100%;
+    font-style: 400;
+}
+
+*:not(head) {
+    display: block;
+    margin: 0px;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#elContent {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+m-app {
+    display: grid;
+    width: 100%;
+}
+
+m-main-positioner {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding-left: 42px;
+    padding-right: 42px;
+    padding-bottom: 42px;
+    background: linear-gradient(#42b8b8, #3a5f5f 0.2%, #5c3e5c 99.8%, #b842b8);
+}
+
+m-main {
+    display: grid;
+    flex-grow: 1;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: auto 1fr;
+}
+
+m-game-positioner {
+    height: 100%;
+    width: 100%;
+}
+
+m-game {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    height: 100%;
+    width: 100%;
+}
+
+m-title-bar {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+}
+
+m-titel {
+    grid-area: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    margin-top: 21px;
+    margin-bottom: 14px;
+    align-items: center;
+    color: #8feb39;
+}
+
+m-titel-woord {
+    display: flex;
+    flex-direction: row;
+}
+
+m-titel-letter {
+    width: 20px;
+    height: 20px;
+}
+
+m-titel-lijn {
+    display: flex;
+    flex-direction: row;
+}
+
+m-titel-segment {
+    width: 20px;
+    height: 20px;
+}
+
+m-title-bar-button-container {
+    grid-area: 1 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    visibility: hidden;
+}
+
+m-game-pad-button-container {
+    display: flex;
+    /* TODO implement */
+    display: none;
+}
+
+m-app._display_game-over m-top-scores-link-container {
+    visibility: visible;
+}
+
+#el_top_scores_link {
+    font-size: 12px;
+    color: var(--clr-blue);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+m-bar {
+    grid-area: 2 / 1;
+    display: flex;
+    height: 1rem;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+m-speler-name {
+    color: #508a8a;
+}
+
+m-score {
+    color: #508a8a;
+}
+
+m-slangenveld-positioner {
+    grid-area: 3/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    row-gap: 16px;
+}
+
+m-slangenveld-positioner-2 {
+    display: grid;
+    align-self: stretch;
+    justify-self: stretch;
+}
+
+m-slangenveld {
+    display: grid;
+    justify-items: stretch;
+    align-content: stretch;
+    overflow: hidden;
+    
+    aspect-ratio: 1 / 1;
+}
+
+m-help-text-container {
+    grid-area: 1 / 1;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+
+m-help-text-container._show-help-text {
+    display: flex;
+    opacity: 1;
+}
+
+m-help-text-container._show-help-text._show-help-text_fade-out_start {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+m-help-text-container._show-help-text._show-help-text_fade-out_end {
+    opacity: 0;
+}
+
+m-help-text {
+    align-self: center;
+    background: rgb(243 77 144 / 69%);
+    justify-self: center;
+    color: rgb(196, 198, 230);
+    padding-right: 35px;
+    padding-left: 35px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#el_speler_name_input {
+    opacity: 0;
+    grid-area: 1 / 1;
+}
+
+#el_speler_name_input._inactive {
+    display: none;
+}
+
+/* TODO use img element */
+/* m-achtergrond {
+    grid-area: 1/1;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+} */
+
+/* m-schilderij {
+    width: 100%;
+    height: 100%;
+
+} */
+
+m-slangenveld-raster {
+    grid-area: 1/1;
+    display: grid;
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
+    justify-items: stretch;
+    align-items: stretch;
+    background-image: url(schilderij.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+}
+
+m-slangenveld-vak {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+m-slangenveld-vak::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(245, 224, 234, 0.5);
+}
+
+m-slangenveld-vak::before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(245, 224, 234, 0.5);
+}
+
+m-slangenveld-vak-content {
+
+}
+
+m-slangenveld-vak-content._green {
+    color: var(--clr-green);
+}
+
+m-slangenveld-vak-content._pink {
+    color: var(--clr-pink);
+}
+
+m-slangenveld-vak-content._bold {
+    font-weight: 900;
+}
+
+m-slangenveld-vak-content._rotated_90_deg {
+    transform: rotate(90deg);
+}
+
+m-slangenveld-vak-content._rotated_180_deg {
+    transform: rotate(180deg);
+}
+
+m-slangenveld-vak-content._rotated_270_deg {
+    transform: rotate(270deg);
+}
+
+m-slangenveld-vak-content._plinking {
+    animation: 0.4s plink infinite;
+    animation-timing-function: steps(2, jump-none);
+}
+
+@keyframes plink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+m-game-pad {
+    display: flex;
+    visibility: hidden;
+}
+
+m-app._display_game-playing m-game-pad {
+    visibility: visible;
+}

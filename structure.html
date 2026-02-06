@@ -1,0 +1,129 @@
+//@batch = app
+<m-app id="el_app">
+    <input id="el_speler_name_input" type="text" />
+    <m-main-positioner id="el_main_positioner">
+        <m-main id="el_main">
+            <m-title-bar>
+                <m-titel>
+                    <m-titel-woord>
+                        <m-titel-letter>m</m-titel-letter>
+                        <m-titel-letter>a</m-titel-letter>
+                        <m-titel-letter>a</m-titel-letter>
+                        <m-titel-letter>k</m-titel-letter>
+                        <m-titel-letter> </m-titel-letter>
+                        <m-titel-letter>m</m-titel-letter>
+                        <m-titel-letter>e</m-titel-letter>
+                        <m-titel-letter> </m-titel-letter>
+                        <m-titel-letter>s</m-titel-letter>
+                        <m-titel-letter>l</m-titel-letter>
+                        <m-titel-letter>a</m-titel-letter>
+                        <m-titel-letter>a</m-titel-letter>
+                        <m-titel-letter>a</m-titel-letter>
+                        <m-titel-letter>n</m-titel-letter>
+                        <m-titel-letter>g</m-titel-letter>
+                    </m-titel-woord>
+                    <m-titel-lijn>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                        <m-titel-segment>-</m-titel-segment>
+                    </m-titel-lijn>
+                </m-titel>
+                <m-title-bar-button-container>
+                    <m-game-pad-button-container>
+                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                            <path d="M 0 0 L 20 0 L 20 20 L 0 20 Z" stroke="var(--clr-blue)" fill="none" />
+                            <path d="M 0 0 L 20 20" stroke="var(--clr-blue)" fill="none" /> 
+                            <path d="M 20 0 L 0 20" stroke="var(--clr-blue)" fill="none" /> 
+                        </svg>
+                    </m-game-pad-button-container>
+                    <m-top-scores-link-container>
+                        <a id="el_top_scores_link">123</a>
+                    </m-top-scores-link-container>
+                </m-button-container>
+            </m-title-bar>
+
+            <m-game-positioner id="el_game_positioner">
+                <m-game>
+                    <m-bar id="el_bar">
+                        <m-speler-name id="el_speler_name"></m-speler-name>
+                        <m-score id="el_score"></m-score>
+                    </m-bar>
+
+                    <m-slangenveld-positioner id="el_slangenveld_positioner">
+                        <m-slangenveld-positioner-2>
+                            <m-slangenveld id="el_slangenveld">
+                                <m-slangenveld-raster id="el_slangenveld_raster">
+                                    @for (var i = 0; i < 24; ++i) {
+                                        @for (var j = 0; j < 24; ++j) {
+                                            var x = i + 1;
+                                            var y = j + 1;
+                                            <m-slangenveld-vak
+                                                style="grid-row: @y; grid-column: @x;"
+                                                y="@y" x="@x">
+                                                <m-slangenveld-vak-content>
+
+                                                </m-slangenveld-vak-content>
+                                            </m-slangenveld-vak>
+                                        }
+                                    }
+                                </m-slangenveld-raster>
+                                <m-help-text-container id="el_help_text_container">
+                                    <m-help-text id="el_help_text"></m-help-text>
+                                </m-help-text-container>
+                            </m-slangenveld>
+                        </m-slangenveld-positioner-2>
+                    </m-slangenveld-positioner>
+                </m-game>
+            </m-game-positioner>
+        </m-main>
+    </m-main-positioner>
+
+    <m-game-pad id="el_game_pad">
+        <svg height="100%" width="100%" preserveAspectRatio="none" viewBox="0 0 100 100">
+            <defs>
+                <radialGradient id="svg_game_pad_background" cx="50%" cy="50%">
+                    <stop offset="0%" stop-color="#bbddff44"></stop>
+                    <stop offset="100%" stop-color="#ffbbdd66"></stop>
+                </radialGradient>
+
+                <clipPath id="svg_game_pad_clip_path_up">
+                    <path d="M0 0 L50 50 L100 0 Z" />
+                </clipPath>
+
+                <clipPath id="svg_game_pad_clip_path_down">
+                    <path d="M0 100 L50 50 L100 100 Z" />
+                </clipPath>
+
+                <clipPath id="svg_game_pad_clip_path_left">
+                    <path d="M0 0 L50 50 L0 100 Z" />
+                </clipPath>
+
+                <clipPath id="svg_game_pad_clip_path_right">
+                    <path d="M100 0 L50 50 L100 100 Z" />
+                </clipPath>
+            </defs>
+
+            <path id="el_game_pad_up" class="el_game_pad"
+                d="M0 0 L0 100 L100 100 L100 0Z" fill="url(#svg_game_pad_background)" clip-path="url(#svg_game_pad_clip_path_up)" />
+            <path id="el_game_pad_down" class="el_game_pad"
+                d="M0 0 L0 100 L100 100 L100 0Z" fill="url(#svg_game_pad_background)" clip-path="url(#svg_game_pad_clip_path_down)" />
+            <path id="el_game_pad_left" class="el_game_pad"
+                d="M0 0 L0 100 L100 100 L100 0Z" fill="url(#svg_game_pad_background)" clip-path="url(#svg_game_pad_clip_path_left)" />
+            <path id="el_game_pad_right" class="el_game_pad"
+                d="M0 0 L0 100 L100 100 L100 0Z" fill="url(#svg_game_pad_background)" clip-path="url(#svg_game_pad_clip_path_right)" />
+
+        </svg>
+    </m-game-pad>
+</m-app>

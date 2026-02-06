@@ -1,0 +1,20 @@
+m-game-pad {
+    grid-area: 1/1;
+    z-index: 1;
+}
+
+m-game-pad .el_game_pad {
+    opacity: 0;
+}
+
+m-game-pad .el_game_pad._touched {
+    opacity: 1;
+}
+
+m-game-pad .el_game_pad._touched._fading_start {
+    transition: 1s ease opacity;
+}
+
+m-game-pad .el_game_pad._touched._fading_end {
+    opacity: 0;
+}
