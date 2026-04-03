@@ -1,8 +1,8 @@
-import * as Application from '../application.js'
+import * as Utils from '../utils.js'
 
 export default new class HelpTextView {
     #fn_cancel
-    #context = new Application.ClearableContext()
+    #context = new Utils.ClearableContext()
 
     activate(text) {
         el_help_text.textContent = text
@@ -27,11 +27,11 @@ export default new class HelpTextView {
         
         el_help_text_container.classList.add('_show-help-text')
 
-        this.#fn_cancel = Application.Cancellable.setTimeout(() => {
+        this.#fn_cancel = Utils.Cancellable.setTimeout(() => {
             el_help_text_container.classList.add('_show-help-text_fade-out_start')
-            this.#fn_cancel = Application.Cancellable.requestAnimationFrame(() => {
+            this.#fn_cancel = Utils.Cancellable.requestAnimationFrame(() => {
                 el_help_text_container.classList.add('_show-help-text_fade-out_end')
-                this.#fn_cancel = Application.Cancellable.addEventListener(el_help_text_container, 'transitionend', ev => {
+                this.#fn_cancel = Utils.Cancellable.addEventListener(el_help_text_container, 'transitionend', ev => {
                 el_help_text_container.classList.remove('_show-help-text', '_show-help-text_fade-out_start', '_show-help-text_fade-out_end')
                     this.#fn_cancel = undefined
                 }, { once: true })

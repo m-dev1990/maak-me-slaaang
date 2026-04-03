@@ -1,5 +1,5 @@
-import * as Application from '../application.js'
-import * as MainDisplay from './MainDisplay.js'
+import * as Utils from '../utils.js'
+import MainView from '../views/MainView.js'
 import SlangenveldView from '../views/SlangenveldView.js'
 import HelpTextView from '../views/HelpTextView.js'
 
@@ -7,13 +7,14 @@ import HelpTextView from '../views/HelpTextView.js'
 let el_speler_name_input = globalThis.el_speler_name_input
 
 export default new class SpelerNameDisplay {
-    #context = new Application.ClearableContext()
+    #context
     #speler_name = ''
-    #fn_cancel_help_text
     #fn_resolve
-    
+
     activate() {
-        MainDisplay.set_display('speler-name')
+        this.#context = new Utils.ClearableContext()
+        
+        MainView.set_display_class('speler-name')
         HelpTextView.activate('Voer uw naam in en druk op Enter.')
 
         this.#context.addEventListener(el_speler_name_input, 'blur', this.#handle_blur)
@@ -34,12 +35,12 @@ export default new class SpelerNameDisplay {
         let speler_name_prev = this.#speler_name
         this.#speler_name = el_speler_name_input.value
         let boxes_to_update_count = Math.max(this.#speler_name.length, speler_name_prev.length)
-        for (let x = 0; x < boxes_to_update_count; ++x) {
-            let letter = this.#speler_name[x]
+        for (let i = 0; i < boxes_to_update_count; ++i) {
+            let letter = this.#speler_name[i]
             if (letter !== undefined) {
-                SlangenveldView.render_cell_content([11 + x, 11], letter)
+                SlangenveldView.render_cell_content([11 + i, 11], letter)
             } else {
-                SlangenveldView.render_cell_content([11 + x, 11], undefined)
+                SlangenveldView.render_cell_content([11 + i, 11], undefined)
             }
         }
     }
@@ -61,7 +62,7 @@ export default new class SpelerNameDisplay {
             HelpTextView.deactivate()
 
             for (let x = 0; x < this.#speler_name.length; ++x) {
-                SlangenveldView.render_cell_content([11 + 1, 11], undefined)
+                SlangenveldView.render_cell_content([11 + x, 11], undefined)
             }
 
             el_speler_name_input.classList.add('_inactive')

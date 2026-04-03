@@ -1,7 +1,7 @@
-import * as application from '../application.js'
+import * as Utils from '../utils.js'
 import templates from '../structure.js'
 import SlangenveldView from './SlangenveldView.js'
-import Game from '../Game.js'
+import GameEngine from '../engines/GameEngine.js'
 
 let GamePlayingView = {
     start(game) {
@@ -57,13 +57,13 @@ let GamePlayingView = {
     },
     render_tongue_segment(segment) {
         let rotation_degrees
-        if (app.game.snake.movement[0] === Game.Directions.up[0] && app.game.snake.movement[1] === Game.Directions.up[1]) {
+        if (app.game.snake.movement[0] === GameEngine.Directions.up[0] && app.game.snake.movement[1] === GameEngine.Directions.up[1]) {
             rotation_degrees = 0
-        } else if (app.game.snake.movement[0] === Game.Directions.right[0] && app.game.snake.movement[1] === Game.Directions.right[1]) {
+        } else if (app.game.snake.movement[0] === GameEngine.Directions.right[0] && app.game.snake.movement[1] === GameEngine.Directions.right[1]) {
             rotation_degrees = 90
-        } else if (app.game.snake.movement[0] === Game.Directions.down[0] && app.game.snake.movement[1] === Game.Directions.down[1]) {
+        } else if (app.game.snake.movement[0] === GameEngine.Directions.down[0] && app.game.snake.movement[1] === GameEngine.Directions.down[1]) {
             rotation_degrees = 180
-        } else if (app.game.snake.movement[0] === Game.Directions.left[0] && app.game.snake.movement[1] === Game.Directions.left[1]) {
+        } else if (app.game.snake.movement[0] === GameEngine.Directions.left[0] && app.game.snake.movement[1] === GameEngine.Directions.left[1]) {
             rotation_degrees = 270
         }
 
@@ -78,11 +78,11 @@ let GamePlayingView = {
     },
     clear() {
         let [x, y] = app.game.pomme.position
-        SlangenveldView.grid[y][x][application.$DOM$].el_slangenveld_vak_content.textContent = ''
+        SlangenveldView.grid[y][x][Utils.$DOM$].el_slangenveld_vak_content.textContent = ''
 
         for (let snake_segment of app.game.snake.segments) {
             let [x, y] = snake_segment.position
-            SlangenveldView.grid[y][x][application.$DOM$].el_slangenveld_vak_content.textContent = ''
+            SlangenveldView.grid[y][x][Utils.$DOM$].el_slangenveld_vak_content.textContent = ''
         }
     }
 }

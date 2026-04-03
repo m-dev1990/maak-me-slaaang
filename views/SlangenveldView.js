@@ -1,4 +1,4 @@
-import * as application from '../application.js'
+import * as Utils from '../utils.js'
 import templates from '../structure.js'
 
 // 2. Setup static game content
@@ -28,7 +28,7 @@ let el_game_positioner = globalThis.el_game_positioner
 
 /**
  * @typedef {{
- *   [key in application.$DOM$]: {
+ *   [key in Utils.$DOM$]: {
  *      el_slangenveld_vak: HTMLElement,
  *      el_slangenveld_vak_content: HTMLElement,
  *   }
@@ -47,7 +47,7 @@ for (let el_slangenveld_vak of arr_el_slangenveld_vak) {
 
     grid[y][x] = {
         position: [x, y],
-        [application.$DOM$]: {
+        [Utils.$DOM$]: {
             el_slangenveld_vak: el_slangenveld_vak,
             el_slangenveld_vak_content: el_slangenveld_vak_content,
         }
@@ -63,14 +63,22 @@ for (let el_slangenveld_vak of arr_el_slangenveld_vak) {
     size_slangenveld()
 
     function size_slangenveld() {
-        let height = el_main.clientHeight
-        let width = el_main.clientWidth
+        let height = el_slangenveld_positioner.clientHeight
+        let width = el_slangenveld_positioner.clientWidth
         let shortest_side_size = Math.min(height, width)
-
         let cell_size = Math.floor((shortest_side_size - 23) / 24)
         let font_size = Math.floor((cell_size * 0.65) / 2) * 2
+        
         el_slangenveld.style.lineHeight = font_size + 'px'
         el_slangenveld.style.fontSize = font_size + 'px'
+
+        if (el_slangenveld_positioner.clientWidth < el_slangenveld_positioner.clientHeight) {
+            el_slangenveld.classList.remove('_horizontal')
+            el_slangenveld.classList.add('_vertical')
+        } else {
+            el_slangenveld.classList.remove('_vertical')
+            el_slangenveld.classList.add('_horizontal')
+        }
     }
 })()
 
@@ -113,7 +121,7 @@ export default new class SlangenveldView {
 
     #render_cell_content(position, content, params) {
         let cell = this.grid[position[1]][position[0]]
-        let cellDOM = cell[application.$DOM$]
+        let cellDOM = cell[Utils.$DOM$]
         
         if (cellDOM.el_slangenveld_vak_content !== undefined) {
             cellDOM.el_slangenveld_vak_content.remove()

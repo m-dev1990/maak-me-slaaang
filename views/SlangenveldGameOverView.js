@@ -1,4 +1,3 @@
-import * as application from '../application.js'
 import SlangenveldView from './SlangenveldView.js'
 import templates from '../structure.js'
 

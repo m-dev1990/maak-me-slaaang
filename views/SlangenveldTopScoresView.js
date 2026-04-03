@@ -1,4 +1,3 @@
-import * as Application from '../application.js'
 import SlangenveldView from './SlangenveldView.js'
 
 export default new class SlangenveldTopScoresView {

@@ -1,18 +1,18 @@
-import * as Application from '../application.js'
-import * as MainDisplay from './MainDisplay.js'
-import GameOverKeyboard from '../keyboards/GameOverKeyboard.js'
+import * as Utils from '../utils.js'
 import MainView from '../views/MainView.js'
 import SlangenveldGameOverView from '../views/SlangenveldGameOverView.js'
 
 export default new class GameOverDisplay {
     #fn_resolve
-    #context = new Application.ClearableContext()
+    #context = new Utils.ClearableContext()
 
     start() {
-        GameOverKeyboard.activate()
-        MainDisplay.set_display('game-over')
-        MainView.activate_top_scores_link()
-        SlangenveldGameOverView.render()        
+        MainView.set_display_class('game-over')
+        SlangenveldGameOverView.render()
+        
+        this.#context.addEventListener(el_top_scores_link, 'click', this.#handle_click_top_scores_link)
+        this.#context.addEventListener(document, 'keydown', this.#handle_keydown, {})      
+
         return this
     }
 
@@ -20,12 +20,20 @@ export default new class GameOverDisplay {
         this.#fn_resolve = fn_resolve
     }
 
-    close(params) {
-        GameOverKeyboard.deactivate()
-        MainView.deactivate_top_scores_link()
+    #close(params) {
         SlangenveldGameOverView.clear(app.game)
         this.#context.clear()
         this.#fn_resolve(params)
         this.#fn_resolve = undefined
+    }
+
+    #handle_click_top_scores_link = (ev) => {
+        this.#close({ next_view: 'top-scores' })
+    }
+
+    #handle_keydown = ev => {
+        if (ev.key === 'Enter') {
+            this.#close()
+        }
     }
 }
