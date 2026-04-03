@@ -19,6 +19,7 @@ export default new class TopScoresDisplay {
 
     #handle_keydown = ev => {
         if (ev.key === 'Enter') {
+            this.#context.clear()
             SlangenveldTopScoresView.clear()
             this.#fn_res()
             this.#fn_res = undefined
