@@ -225,6 +225,7 @@ m-help-text {
 #el_speler_name_input {
     opacity: 0;
     grid-area: 1 / 1;
+    position: relative;
 }
 
 #el_speler_name_input._inactive {
