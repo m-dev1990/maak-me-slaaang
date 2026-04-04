@@ -89,9 +89,7 @@ function update_move() {
     // 3. if yes, eat pomme
     if (eats_pomme) {
         pomme_previous = app.game.pomme
-        pomme_next = generate_pomme_state(app.game.snake)
         segment_head_next.is_pomme = true
-        app.game.pomme = pomme_next
     }
 
     // 4. if no, move tail (else grow)
@@ -103,6 +101,12 @@ function update_move() {
 
     app.game.snake.segments.push(segment_head_next)
     app.game.steps = app.game.steps + 1
+
+    // if pomme is eaten, throw next one in snake field
+    if (eats_pomme) {
+        pomme_next = generate_pomme_state(app.game.snake)
+        app.game.pomme = pomme_next
+    }
 
     let level = undefined
     if (app.game.steps % 24 === 0) {
