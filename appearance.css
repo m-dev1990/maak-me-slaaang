@@ -56,10 +56,10 @@ m-main-positioner {
     background: linear-gradient(#42b8b8, #3a5f5f 0.2%, #5c3e5c 99.8%, #b842b8);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
     m-main-positioner {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
 }
 

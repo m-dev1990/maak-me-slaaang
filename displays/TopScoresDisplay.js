@@ -10,6 +10,11 @@ export default new class TopScoresDisplay {
         MainView.set_display_class('top-scores')
         SlangenveldTopScoresView.start(top_scores)
         this.#context.addEventListener(document, 'keydown', this.#handle_keydown, {})
+        
+        if (!Utils.has_keyboard) {
+            this.#context.addEventListener(document, 'touchstart', this.#handle_touchstart, {})
+        }
+
         return this
     }
 
@@ -19,10 +24,18 @@ export default new class TopScoresDisplay {
 
     #handle_keydown = ev => {
         if (ev.key === 'Enter') {
-            this.#context.clear()
-            SlangenveldTopScoresView.clear()
-            this.#fn_res()
-            this.#fn_res = undefined
+            this.#close()
         }
+    }
+
+    #handle_touchstart = ev => {
+        this.#close()
+    }
+
+    #close() {
+        this.#context.clear()
+        SlangenveldTopScoresView.clear()
+        this.#fn_res()
+        this.#fn_res = undefined
     }
 }

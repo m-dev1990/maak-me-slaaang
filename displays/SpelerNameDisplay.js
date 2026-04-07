@@ -17,14 +17,7 @@ export default new class SpelerNameDisplay {
         MainView.set_display_class('speler-name')
         HelpTextView.activate('Voer uw naam in en druk op Enter.')
 
-        let has_keyboard
-        if (navigator.userAgentData?.mobile !== undefined) {
-            has_keyboard = !navigator.userAgentData.mobile
-        } else {
-            has_keyboard = window.innerWidth > 800
-        }
-
-        if (!has_keyboard) {
+        if (!Utils.has_keyboard) {
             this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)
         }
         

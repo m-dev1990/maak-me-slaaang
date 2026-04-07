@@ -12,7 +12,9 @@ export default new class GameOverDisplay {
         
         this.#context.addEventListener(el_top_scores_link, 'click', this.#handle_click_top_scores_link)
         this.#context.addEventListener(document, 'keydown', this.#handle_keydown, {})      
-
+        if (!Utils.has_keyboard) {
+            this.#context.addEventListener(document, 'touchstart', this.#handle_touchstart, {})
+        }    
         return this
     }
 
@@ -27,7 +29,11 @@ export default new class GameOverDisplay {
         this.#fn_resolve = undefined
     }
 
-    #handle_click_top_scores_link = (ev) => {
+    /**
+     * 
+     * @param {MouseEvent} ev 
+     */
+    #handle_click_top_scores_link = ev => {
         this.#close({ next_view: 'top-scores' })
     }
 
@@ -35,5 +41,12 @@ export default new class GameOverDisplay {
         if (ev.key === 'Enter') {
             this.#close()
         }
+    }
+
+    #handle_touchstart = ev => {
+        let el = ev.target
+        if (el === el_top_scores_link) return
+
+        this.#close()
     }
 }

@@ -21,7 +21,11 @@ export class ClearableContext {
             fn_clear = Cancellable.requestAnimationFrame(handle_animation_frame)
         }
 
-        this.#array_fn_clear.push(() => fn_clear())
+        function clear() {
+            fn_clear()
+        }
+
+        this.#array_fn_clear.push(() => clear())
     }
 
     add_clear_action(fn_clear) {
@@ -56,3 +60,15 @@ export const Cancellable = {
         }
     },
 }
+
+
+
+export const has_keyboard = (function has_keyboard () {
+    let has_keyboard
+    if (navigator.userAgentData?.mobile !== undefined) {
+        has_keyboard = !navigator.userAgentData.mobile
+    } else {
+        has_keyboard = window.innerWidth > 800
+    }
+    return has_keyboard
+})()
