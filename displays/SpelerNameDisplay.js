@@ -17,7 +17,17 @@ export default new class SpelerNameDisplay {
         MainView.set_display_class('speler-name')
         HelpTextView.activate('Voer uw naam in en druk op Enter.')
 
-        //this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)
+        let has_keyboard
+        if (navigator.userAgentData?.mobile !== undefined) {
+            has_keyboard = !navigator.userAgentData.mobile
+        } else {
+            has_keyboard = window.innerWidth > 800
+        }
+
+        if (!has_keyboard) {
+            this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)
+        }
+        
         this.#context.addEventListener(el_speler_name_input, 'blur', this.#handle_blur)
         this.#context.addEventListener(el_speler_name_input, 'input', this.#handle_input)
         this.#context.addEventListener(el_speler_name_input, 'keydown', this.#handle_keydown)
@@ -31,9 +41,9 @@ export default new class SpelerNameDisplay {
         this.#fn_resolve = fn_resolve
     }
 
-    // #handle_touch_start = ev => {
-    //     el_speler_name_input.focus()
-    // }
+    #handle_touch_start = ev => {
+        el_speler_name_input.focus()
+    }
 
     /** @param {Event} ev */
     #handle_input = ev => {

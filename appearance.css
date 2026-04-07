@@ -192,7 +192,6 @@ m-help-text-container {
     align-items: center;
     justify-items: center;
     height: 100%;
-    z-index: 1;
     display: none;
 }
 
@@ -226,6 +225,8 @@ m-help-text {
     opacity: 0;
     grid-area: 1 / 1;
     position: relative;
+    /* required to receive focus to trigger the keyboard on some mobile devices */
+    z-index: 1;
 }
 
 #el_speler_name_input._inactive {
