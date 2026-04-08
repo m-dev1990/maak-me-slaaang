@@ -19,7 +19,6 @@ export default new class SpelerNameDisplay {
         
         this.#context.addEventListener(el_speler_name_input, 'blur', this.#handle_blur)
         this.#context.addEventListener(el_speler_name_input, 'input', this.#handle_input)
-
         this.#context.addEventListener(el_speler_name_form, 'submit', this.#handle_submit)
         if (!Utils.has_keyboard) {
             this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)

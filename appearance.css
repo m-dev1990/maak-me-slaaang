@@ -227,6 +227,7 @@ m-help-text {
     position: relative;
     /* required to receive focus to trigger the keyboard on some mobile devices */
     z-index: 1;
+    display: grid;
 }
 
 #el_speler_name_form._inactive {
@@ -234,7 +235,12 @@ m-help-text {
 }
 
 #el_speler_name_input {
+    display: block;
     opacity: 0;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
 }
 
 /* TODO use img element */
