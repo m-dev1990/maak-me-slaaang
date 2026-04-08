@@ -16,14 +16,14 @@ export default new class SpelerNameDisplay {
         
         MainView.set_display_class('speler-name')
         HelpTextView.activate('Voer uw naam in en druk op Enter.')
-
-        if (!Utils.has_keyboard) {
-            this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)
-        }
         
         this.#context.addEventListener(el_speler_name_input, 'blur', this.#handle_blur)
         this.#context.addEventListener(el_speler_name_input, 'input', this.#handle_input)
-        this.#context.addEventListener(el_speler_name_input, 'keydown', this.#handle_keydown)
+
+        this.#context.addEventListener(el_speler_name_form, 'submit', this.#handle_submit)
+        if (!Utils.has_keyboard) {
+            this.#context.addEventListener(document, 'touchstart', this.#handle_touch_start)
+        }
 
         el_speler_name_input.focus()
 
@@ -32,10 +32,6 @@ export default new class SpelerNameDisplay {
 
     then(fn_resolve) {
         this.#fn_resolve = fn_resolve
-    }
-
-    #handle_touch_start = ev => {
-        el_speler_name_input.focus()
     }
 
     /** @param {Event} ev */
@@ -58,24 +54,34 @@ export default new class SpelerNameDisplay {
         el_speler_name_input.focus()
     }
 
-    /** @param {KeyboardEvent} ev */
-    #handle_keydown = ev => {
-        if (ev.key === 'Enter') {
-            if (this.#speler_name.trim() === '') return
-
-            el_speler_name_input.removeEventListener('blur', this.#handle_blur)
-            el_speler_name_input.removeEventListener('input', this.#handle_input)
-            el_speler_name_input.removeEventListener('keydown', this.#handle_keydown)
-
-            HelpTextView.deactivate()
-
-            for (let x = 0; x < this.#speler_name.length; ++x) {
-                SlangenveldView.render_cell_content([11 + x, 11], undefined)
-            }
-
-            el_speler_name_input.classList.add('_inactive')
-
-            this.#fn_resolve(this.#speler_name)
+    #handle_submit = ev => {
+        ev.preventDefault()
+        
+        if (this.#speler_name.trim() !== '') {
+            this.#close()
         }
+
+        return false
+    }
+    
+    #handle_touch_start = ev => {
+        if (this.#speler_name.trim() === '') {
+            el_speler_name_input.focus()
+        } else {
+            this.#close()
+        }
+    }
+
+    #close() {
+        this.#context.clear()
+        HelpTextView.deactivate()
+
+        for (let x = 0; x < this.#speler_name.length; ++x) {
+            SlangenveldView.render_cell_content([11 + x, 11], undefined)
+        }
+
+        el_speler_name_form.classList.add('_inactive')
+
+        this.#fn_resolve(this.#speler_name)
     }
 }

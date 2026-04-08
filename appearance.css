@@ -221,7 +221,7 @@ m-help-text {
     text-align: center;
 }
 
-#el_speler_name_input {
+#el_speler_name_form {
     opacity: 0;
     grid-area: 1 / 1;
     position: relative;
@@ -229,8 +229,12 @@ m-help-text {
     z-index: 1;
 }
 
-#el_speler_name_input._inactive {
+#el_speler_name_form._inactive {
     display: none;
+}
+
+#el_speler_name_input {
+    opacity: 0;
 }
 
 /* TODO use img element */

@@ -4,7 +4,6 @@ export class ClearableContext {
     #array_fn_clear = []
 
     /**
-     * 
      * @param {HTMLElement} el 
      * @param {string} event_name 
      * @param {ev => void} fn_listener 
@@ -61,9 +60,7 @@ export const Cancellable = {
     },
 }
 
-
-
-export const has_keyboard = (function has_keyboard () {
+export const has_keyboard = (function generate_has_keyboard () {
     let has_keyboard
     if (navigator.userAgentData?.mobile !== undefined) {
         has_keyboard = !navigator.userAgentData.mobile
@@ -71,4 +68,8 @@ export const has_keyboard = (function has_keyboard () {
         has_keyboard = window.innerWidth > 800
     }
     return has_keyboard
+})()
+
+export const is_iOS = (function generate_is_iOS() {
+    return ['iPhone', 'iPad'].some(iOS => window.navigator.userAgent.includes(iOS))
 })()
