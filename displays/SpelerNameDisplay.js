@@ -50,7 +50,9 @@ export default new class SpelerNameDisplay {
 
     /** @param {FocusEvent} ev */
     #handle_blur = ev => {
+        return false
         el_speler_name_input.focus()
+
     }
 
     #handle_submit = ev => {
